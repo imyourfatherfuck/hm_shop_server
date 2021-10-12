@@ -31,7 +31,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table tableName="swipers" domainObjectName="Swipers" enableCountByExample="false"
+		<table tableName="goods" domainObjectName="Goods" enableCountByExample="false"
 		enableUpdateByExample="false" enableDeleteByExample="false" 
 		enableSelectByExample="false" selectByExampleQueryId="false">
 			<!-- <property name="useActualColumnNames" value="true"/> -->
