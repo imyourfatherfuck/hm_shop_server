@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccoc.dao.CategoryItemMapper">
+    <resultMap id="BaseResultMap" type="com.ccoc.model.CategoryItem">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="zhaiyao" property="zhaiyao" jdbcType="VARCHAR"/>
+        <result column="cateId" property="cateid" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, title, img_url, zhaiyao, cateId
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from category_item
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="findByCateId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from category_item
+        where cateId = #{cateId}
+    </select>
+
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from category_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.ccoc.model.CategoryItem">
+    insert into category_item (id, title, img_url, 
+      zhaiyao, cateId)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, 
+      #{zhaiyao,jdbcType=VARCHAR}, #{cateid,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ccoc.model.CategoryItem">
+        insert into category_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="imgUrl != null">
+                img_url,
+            </if>
+            <if test="zhaiyao != null">
+                zhaiyao,
+            </if>
+            <if test="cateid != null">
+                cateId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null">
+                #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="zhaiyao != null">
+                #{zhaiyao,jdbcType=VARCHAR},
+            </if>
+            <if test="cateid != null">
+                #{cateid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ccoc.model.CategoryItem">
+        update category_item
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null">
+                img_url = #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="zhaiyao != null">
+                zhaiyao = #{zhaiyao,jdbcType=VARCHAR},
+            </if>
+            <if test="cateid != null">
+                cateId = #{cateid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ccoc.model.CategoryItem">
+    update category_item
+    set title = #{title,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      zhaiyao = #{zhaiyao,jdbcType=VARCHAR},
+      cateId = #{cateid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

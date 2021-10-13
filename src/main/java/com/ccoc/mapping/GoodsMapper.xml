@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccoc.dao.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.ccoc.model.Goods" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="zhaiyao" property="zhaiyao" jdbcType="VARCHAR" />
+    <result column="click" property="click" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="sell_price" property="sellPrice" jdbcType="VARCHAR" />
+    <result column="market_price" property="marketPrice" jdbcType="VARCHAR" />
+    <result column="stock_quantity" property="stockQuantity" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, add_time,title, zhaiyao, click, img_url, sell_price, market_price, stock_quantity
+  </sql>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="findById" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from goods
+    where id = #{id}
+  </select>
+  <select id="findAllGoodsByPageF" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from goods
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ccoc.model.Goods" >
+    insert into goods (id, add_time, title, zhaiyao,
+      click, img_url, sell_price, 
+      market_price, stock_quantity)
+    values (#{id,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR},#{zhaiyao,jdbcType=VARCHAR},
+      #{click,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, #{sellPrice,jdbcType=VARCHAR}, 
+      #{marketPrice,jdbcType=VARCHAR}, #{stockQuantity,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ccoc.model.Goods" >
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="zhaiyao != null" >
+        zhaiyao,
+      </if>
+      <if test="click != null" >
+        click,
+      </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
+      <if test="sellPrice != null" >
+        sell_price,
+      </if>
+      <if test="marketPrice != null" >
+        market_price,
+      </if>
+      <if test="stockQuantity != null" >
+        stock_quantity,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="zhaiyao != null" >
+        #{zhaiyao,jdbcType=VARCHAR},
+      </if>
+      <if test="click != null" >
+        #{click,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sellPrice != null" >
+        #{sellPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="marketPrice != null" >
+        #{marketPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="stockQuantity != null" >
+        #{stockQuantity,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ccoc.model.Goods" >
+    update goods
+    <set >
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="zhaiyao != null" >
+        zhaiyao = #{zhaiyao,jdbcType=VARCHAR},
+      </if>
+      <if test="click != null" >
+        click = #{click,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sellPrice != null" >
+        sell_price = #{sellPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="marketPrice != null" >
+        market_price = #{marketPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="stockQuantity != null" >
+        stock_quantity = #{stockQuantity,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ccoc.model.Goods" >
+    update goods
+    set add_time = #{addTime,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      zhaiyao = #{zhaiyao,jdbcType=VARCHAR},
+      click = #{click,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      sell_price = #{sellPrice,jdbcType=VARCHAR},
+      market_price = #{marketPrice,jdbcType=VARCHAR},
+      stock_quantity = #{stockQuantity,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
